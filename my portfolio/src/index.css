@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --background: #0A0A0A;
   --foreground: #F5F5F0;
@@ -6,16 +10,6 @@
   --muted-foreground: #888888;
   --font-inter: 'Inter', system-ui, sans-serif;
   --font-montserrat: 'Montserrat', system-ui, sans-serif;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
 }
 
 body {
@@ -126,60 +120,6 @@ body {
   color: var(--accent);
 }
 
-/* Card Styles */
-.card {
-  background: var(--muted);
-  border: 1px solid rgba(245, 245, 240, 0.05);
-  border-radius: 1.5rem;
-  transition: all 0.4s ease;
-}
-
-.card:hover {
-  border-color: rgba(245, 245, 240, 0.1);
-  transform: translateY(-4px);
-}
-
-/* Section Padding */
-.section-padding {
-  padding: 8rem 0;
-}
-
-/* Container */
-.container-custom {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-/* Reveal Animation */
-@keyframes reveal {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.reveal {
-  animation: reveal 0.8s ease forwards;
-}
-
-/* Stagger Children */
-.stagger-children > * {
-  opacity: 0;
-  animation: reveal 0.6s ease forwards;
-}
-
-.stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
-.stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
-.stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
-.stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
-.stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
-.stagger-children > *:nth-child(6) { animation-delay: 0.6s; }
-
 /* Noise Texture Overlay */
 .noise-overlay::before {
   content: '';
@@ -192,66 +132,6 @@ body {
   opacity: 0.015;
   z-index: 1000;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
-}
-
-/* Link Hover Effect */
-.link-hover {
-  position: relative;
-  color: var(--foreground);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.link-hover:hover {
-  color: var(--accent);
-}
-
-/* Image Hover Zoom */
-.img-zoom {
-  overflow: hidden;
-}
-
-.img-zoom img {
-  transition: transform 0.6s ease;
-}
-
-.img-zoom:hover img {
-  transform: scale(1.05);
-}
-
-/* Accent Border */
-.accent-border {
-  position: relative;
-}
-
-.accent-border::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background-color: var(--accent);
-  border-radius: 2px;
-}
-
-/* Focus Styles */
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-textarea:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-/* Smooth Image Loading */
-img {
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
-img[data-loading="true"] {
-  opacity: 0;
 }
 
 @keyframes marquee {
@@ -279,12 +159,10 @@ img[data-loading="true"] {
   transform: translate(-8px, -8px);
 }
 
-/* Tailwind utility translations where tailwind CSS might differ in specific environments */
 .font-display {
   font-family: var(--font-montserrat);
 }
 
-/* Writing mode utilities not available natively in all tailwind without extensions */
 .vertical-rl {
   writing-mode: vertical-rl;
   text-orientation: mixed;
