@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en" class="font-inter">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portfolio - Software Developer</title>
+    <meta name="description" content="Portfolio of a Computer Science Student & Developer">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS (via CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: "#0A0A0A",
+                        foreground: "#F5F5F0",
+                        primary: "#0A0A0A",
+                        secondary: "#F5F5F0",
+                        accent: "#3B82F6",
+                        muted: "#1A1A1A",
+                        "muted-foreground": "#888888",
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        display: ['Montserrat', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="antialiased noise-overlay">
+
+    <!-- Desktop Navbar -->
+    <nav
+        class="fixed left-0 top-0 h-screen w-20 z-50 hidden lg:flex flex-col items-center justify-between py-8 border-r border-secondary/5">
+        <button data-scroll-to="home"
+            class="text-lg font-display font-bold tracking-tight text-secondary hover:text-accent transition-colors duration-300 vertical-rl">
+            Prince Sabalpara<span class="text-accent">.</span>
+        </button>
+
+        <div class="flex flex-col items-center gap-2">
+            <button data-scroll-to="home" data-id="home"
+                class="desktop-nav-item group relative flex items-center justify-center w-12 h-12 rounded-2xl transition-all duration-300 bg-accent text-primary">
+                <i data-feather="home" class="w-5 h-5 transition-transform duration-300 scale-110"></i>
+                <span
+                    class="absolute left-16 px-4 py-2 bg-muted text-secondary text-sm font-medium rounded-xl whitespace-nowrap transition-all duration-300 border border-secondary/10 opacity-0 -translate-x-4 pointer-events-none group-hover:opacity-100 group-hover:translate-x-0">Home</span>
+            </button>
+            <button data-scroll-to="about" data-id="about"
+                class="desktop-nav-item group relative flex items-center justify-center w-12 h-12 rounded-2xl transition-all duration-300 text-secondary/40 hover:text-secondary hover:bg-secondary/5">
+                <i data-feather="user" class="w-5 h-5 transition-transform duration-300 group-hover:scale-110"></i>
+                <span
+                    class="absolute left-16 px-4 py-2 bg-muted text-secondary text-sm font-medium rounded-xl whitespace-nowrap transition-all duration-300 border border-secondary/10 opacity-0 -translate-x-4 pointer-events-none group-hover:opacity-100 group-hover:translate-x-0">About</span>
+            </button>
+
+            <button data-scroll-to="skills" data-id="skills"
+                class="desktop-nav-item group relative flex items-center justify-center w-12 h-12 rounded-2xl transition-all duration-300 text-secondary/40 hover:text-secondary hover:bg-secondary/5">
+                <i data-feather="code" class="w-5 h-5 transition-transform duration-300 group-hover:scale-110"></i>
+                <span
+                    class="absolute left-16 px-4 py-2 bg-muted text-secondary text-sm font-medium rounded-xl whitespace-nowrap transition-all duration-300 border border-secondary/10 opacity-0 -translate-x-4 pointer-events-none group-hover:opacity-100 group-hover:translate-x-0">Skills</span>
+            </button>
+            <button data-scroll-to="contact" data-id="contact"
+                class="desktop-nav-item group relative flex items-center justify-center w-12 h-12 rounded-2xl transition-all duration-300 text-secondary/40 hover:text-secondary hover:bg-secondary/5">
+                <i data-feather="mail" class="w-5 h-5 transition-transform duration-300 group-hover:scale-110"></i>
+                <span
+                    class="absolute left-16 px-4 py-2 bg-muted text-secondary text-sm font-medium rounded-xl whitespace-nowrap transition-all duration-300 border border-secondary/10 opacity-0 -translate-x-4 pointer-events-none group-hover:opacity-100 group-hover:translate-x-0">Contact</span>
+            </button>
+        </div>
+
+        <div class="flex flex-col items-center gap-3">
+            <div class="w-px h-12 bg-gradient-to-b from-transparent via-accent/50 to-transparent"></div>
+            <span class="text-[10px] font-medium text-secondary/30 tracking-[0.2em] vertical-rl">SCROLL</span>
+        </div>
+    </nav>
+
+    <!-- Mobile Navbar Top Bar -->
+    <div class="fixed top-0 left-0 right-0 z-50 lg:hidden">
+        <div class="flex items-center justify-between px-6 py-5">
+            <button data-scroll-to="home" class="text-xl font-display font-bold tracking-tight text-secondary">
+                PRINCE<span class="text-accent">.</span>
+            </button>
+            <button id="menu-btn"
+                class="relative z-50 w-12 h-12 flex items-center justify-center rounded-2xl transition-all duration-300 bg-muted text-secondary"
+                aria-label="Toggle Menu">
+                <i id="menu-icon-open" data-feather="menu"></i>
+                <i id="menu-icon-close" data-feather="x" class="hidden"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Full Screen Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 transition-all duration-700 opacity-0 pointer-events-none">
+        <div class="absolute inset-0 bg-primary"></div>
+        <div class="relative h-full flex flex-col lg:flex-row">
+            <div
+                class="flex-1 flex flex-col justify-center px-4 sm:px-8 md:px-16 lg:px-24 pt-24 lg:pt-0 overflow-hidden">
+                <nav class="space-y-1">
+                    <!-- Nav items generated via script or plain HTML -->
+                    <button data-scroll-to="home"
+                        class="nav-link group flex items-center justify-between w-full text-left transition-all duration-500 py-2 sm:py-3 opacity-0 -translate-x-8"
+                        style="transition-delay: 200ms;">
+                        <span
+                            class="nav-text text-4xl sm:text-5xl md:text-7xl font-display font-bold transition-all duration-300 text-accent">Home</span>
+                        <i data-feather="arrow-up-right"
+                            class="nav-arrow w-6 h-6 sm:w-8 sm:h-8 transition-all duration-300 flex-shrink-0 text-accent opacity-100 rotate-0"></i>
+                    </button>
+                    <button data-scroll-to="about"
+                        class="nav-link group flex items-center justify-between w-full text-left transition-all duration-500 py-2 sm:py-3 opacity-0 -translate-x-8"
+                        style="transition-delay: 280ms;">
+                        <span
+                            class="nav-text text-4xl sm:text-5xl md:text-7xl font-display font-bold transition-all duration-300 text-secondary group-hover:text-accent">About</span>
+                        <i data-feather="arrow-up-right"
+                            class="nav-arrow w-6 h-6 sm:w-8 sm:h-8 transition-all duration-300 flex-shrink-0 text-secondary/30 group-hover:text-accent group-hover:rotate-45"></i>
+                    </button>
+
+                    <button data-scroll-to="skills"
+                        class="nav-link group flex items-center justify-between w-full text-left transition-all duration-500 py-2 sm:py-3 opacity-0 -translate-x-8"
+                        style="transition-delay: 440ms;">
+                        <span
+                            class="nav-text text-4xl sm:text-5xl md:text-7xl font-display font-bold transition-all duration-300 text-secondary group-hover:text-accent">Skills</span>
+                        <i data-feather="arrow-up-right"
+                            class="nav-arrow w-6 h-6 sm:w-8 sm:h-8 transition-all duration-300 flex-shrink-0 text-secondary/30 group-hover:text-accent group-hover:rotate-45"></i>
+                    </button>
+                    <button data-scroll-to="contact"
+                        class="nav-link group flex items-center justify-between w-full text-left transition-all duration-500 py-2 sm:py-3 opacity-0 -translate-x-8"
+                        style="transition-delay: 520ms;">
+                        <span
+                            class="nav-text text-4xl sm:text-5xl md:text-7xl font-display font-bold transition-all duration-300 text-secondary group-hover:text-accent">Contact</span>
+                        <i data-feather="arrow-up-right"
+                            class="nav-arrow w-6 h-6 sm:w-8 sm:h-8 transition-all duration-300 flex-shrink-0 text-secondary/30 group-hover:text-accent group-hover:rotate-45"></i>
+                    </button>
+                </nav>
+            </div>
+            <div id="mobile-info"
+                class="lg:w-96 flex flex-col justify-end p-8 md:p-16 transition-all duration-700 opacity-0 translate-y-8"
+                style="transition-delay: 500ms;">
+                <div class="space-y-8">
+                    <div>
+                        <p class="text-secondary/40 text-xs uppercase tracking-widest mb-2">Get in touch</p>
+                        <a href="mailto:princesabalpara2006@gmail.com"
+                            class="text-secondary hover:text-accent transition-colors text-lg font-medium">princesabalpara2006@gmail.com</a>
+                    </div>
+                    <div>
+                        <p class="text-secondary/40 text-xs uppercase tracking-widest mb-2">University</p>
+                        <p class="text-secondary text-lg font-medium">Silver Oak Universtiy, Gota</p>
+                    </div>
+                    <div>
+                        <p class="text-secondary/40 text-xs uppercase tracking-widest mb-3">Links</p>
+                        <div class="flex gap-4">
+                            <a href="https://www.instagram.com/_prince_.239?igsh=cXZtcTJsMzVhNjAw" target="_blank"
+                                class="text-secondary/50 hover:text-accent transition-colors text-sm font-medium hover-underline">Instagram</a>
+                            <a href="https://www.linkedin.com/in/prince-sabalpara-58541a331?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank"
+                                class="text-secondary/50 hover:text-accent transition-colors text-sm font-medium hover-underline">LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="relative">
+
+        <!-- Hero Section -->
+        <section id="home" class="relative min-h-screen flex flex-col justify-between overflow-hidden bg-primary">
+            <div class="absolute inset-0 pointer-events-none">
+                <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-accent/5 to-transparent"></div>
+                <div class="absolute bottom-0 left-1/4 w-[600px] h-[600px] rounded-full bg-accent/3 blur-[150px]"></div>
+            </div>
+
+            <div class="hero-anim opacity-0 relative pt-12 lg:pt-16 overflow-hidden transition-all duration-1000">
+                <div class="flex animate-marquee whitespace-nowrap">
+                    <span class="text-[12vw] font-display font-bold text-secondary/[0.03] mx-4 leading-none">STUDENT •
+                        DEVELOPER • PROGRAMMER • LEARNER •</span>
+                    <span class="text-[12vw] font-display font-bold text-secondary/[0.03] mx-4 leading-none">STUDENT •
+                        DEVELOPER • PROGRAMMER • LEARNER •</span>
+                    <span class="text-[12vw] font-display font-bold text-secondary/[0.03] mx-4 leading-none">STUDENT •
+                        DEVELOPER • PROGRAMMER • LEARNER •</span>
+                    <span class="text-[12vw] font-display font-bold text-secondary/[0.03] mx-4 leading-none">STUDENT •
+                        DEVELOPER • PROGRAMMER • LEARNER •</span>
+                </div>
+            </div>
+
+            <div class="relative z-10 flex-1 flex items-center">
+                <div class="container-custom w-full">
+                    <div class="max-w-6xl mx-auto text-center">
+                        <div class="hero-anim opacity-0 translate-y-8 mb-6 transition-all duration-1000 delay-300">
+                            <span
+                                class="inline-flex items-center gap-4 text-sm font-medium text-secondary/40 tracking-[0.2em] uppercase">
+                                <span class="w-8 h-px bg-accent"></span>
+                                Computer Science Student
+                                <span class="w-8 h-px bg-accent"></span>
+                            </span>
+                        </div>
+
+                        <h1 class="hero-anim opacity-0 translate-y-8 relative transition-all duration-1000 delay-500">
+                            <span
+                                class="hero-text-stroke absolute inset-0 text-7xl sm:text-8xl md:text-9xl lg:text-[12rem] font-display font-bold tracking-tight leading-none">PRINCE</span>
+                            <span
+                                class="relative text-7xl sm:text-8xl md:text-9xl lg:text-[12rem] font-display font-bold tracking-tight text-secondary leading-none">PRINCE</span>
+                        </h1>
+
+                        <div class="hero-anim opacity-0 translate-y-8 mt-4 mb-8 transition-all duration-1000 delay-700">
+                            <p class="text-xl md:text-2xl lg:text-3xl font-light text-secondary/60">
+                                I build <span class="text-accent font-medium">software solutions</span> that scale
+                            </p>
+                        </div>
+
+                        <div
+                            class="hero-anim opacity-0 translate-y-8 flex flex-wrap justify-center gap-3 mb-8 transition-all duration-1000 delay-900">
+                            <span
+                                class="px-5 py-2.5 text-sm font-medium text-secondary/60 border border-secondary/10 rounded-full hover:border-accent hover:text-accent transition-all duration-300 cursor-default">Web
+                                Development</span>
+                            <span
+                                class="px-5 py-2.5 text-sm font-medium text-secondary/60 border border-secondary/10 rounded-full hover:border-accent hover:text-accent transition-all duration-300 cursor-default">Algorithms</span>
+                            <span
+                                class="px-5 py-2.5 text-sm font-medium text-secondary/60 border border-secondary/10 rounded-full hover:border-accent hover:text-accent transition-all duration-300 cursor-default">Data
+                                Structures</span>
+                            <span
+                                class="px-5 py-2.5 text-sm font-medium text-secondary/60 border border-secondary/10 rounded-full hover:border-accent hover:text-accent transition-all duration-300 cursor-default">UI/UX
+                                Design</span>
+                        </div>
+
+                        <div
+                            class="hero-anim opacity-0 translate-y-8 flex flex-wrap justify-center gap-4 transition-all duration-1000 delay-1000">
+                            <button data-scroll-to="contact" class="btn-primary">Let's Connect</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative z-10 pb-8">
+                <div class="container-custom">
+                    <div
+                        class="flex flex-col md:flex-row items-center justify-between gap-6 pt-8 border-t border-secondary/5">
+                        <div
+                            class="hero-anim opacity-0 translate-y-8 flex gap-12 transition-all duration-1000 delay-1200">
+                            <div class="text-center md:text-left">
+                                <div class="text-3xl md:text-4xl font-display font-bold text-secondary">2+</div>
+                                <div class="text-xs text-secondary/40 mt-1 tracking-wider uppercase">Years Coding</div>
+                            </div>
+
+                            <div class="text-center md:text-left">
+                                <div class="text-3xl md:text-4xl font-display font-bold text-secondary">9</div>
+                                <div class="text-xs text-secondary/40 mt-1 tracking-wider uppercase">GPA</div>
+                            </div>
+                        </div>
+
+                        <button data-scroll-to="about"
+                            class="hero-anim opacity-0 flex items-center gap-3 text-secondary/40 hover:text-accent transition-all duration-300 group delay-[1300ms]">
+                            <span class="text-xs tracking-widest uppercase">Scroll Down</span>
+                            <div
+                                class="w-10 h-10 rounded-full border border-secondary/20 flex items-center justify-center group-hover:border-accent transition-colors">
+                                <i data-feather="arrow-down" class="w-4 h-4 animate-bounce"></i>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="hero-anim opacity-0 absolute bottom-0 left-0 right-0 overflow-hidden transition-all duration-1000">
+                <div class="flex animate-marquee-reverse whitespace-nowrap">
+                    <span class="text-[8vw] font-display font-bold text-secondary/[0.02] mx-4 leading-none">CODING •
+                        ENGINEERING • INNOVATION • LOGIC •</span>
+                    <span class="text-[8vw] font-display font-bold text-secondary/[0.02] mx-4 leading-none">CODING •
+                        ENGINEERING • INNOVATION • LOGIC •</span>
+                    <span class="text-[8vw] font-display font-bold text-secondary/[0.02] mx-4 leading-none">CODING •
+                        ENGINEERING • INNOVATION • LOGIC •</span>
+                    <span class="text-[8vw] font-display font-bold text-secondary/[0.02] mx-4 leading-none">CODING •
+                        ENGINEERING • INNOVATION • LOGIC •</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="relative py-32">
+            <div class="container-custom">
+                <div class="max-w-4xl">
+                    <span
+                        class="reveal-anim opacity-0 translate-y-4 inline-flex items-center gap-3 text-sm font-medium text-secondary/40 tracking-[0.2em] uppercase mb-8 transition-all duration-700">
+                        <span class="w-8 h-px bg-accent"></span>
+                        About
+                    </span>
+                    <div class="reveal-anim opacity-0 translate-y-4 space-y-6 text-lg md:text-xl lg:text-2xl text-secondary/80 leading-relaxed transition-all duration-700 delay-200">
+                        <p>
+                            I am a <span class="text-accent font-medium">passionate and dedicated</span> Computer Science Engineering student currently pursuing my 5th Semester with Honors in <span class="text-accent font-medium">Artificial Intelligence and Data Science</span>. I enjoy exploring innovative technologies, solving real-world problems, and continuously improving my technical and leadership skills.
+                        </p>
+                        <p>
+                            With a strong interest in AI, emerging technologies, and community leadership, I actively participate in technical activities, research-oriented learning, and professional development programs.
+                        </p>
+                        <p>
+                            Serving as a <span class="text-accent font-medium">Treasurer</span> at IEEE Silver Oak University Women in Engineering Student Branch Affinity Group.
+                        </p>
+                    </div>
+                    <div
+                        class="reveal-anim opacity-0 translate-y-4 mt-16 pt-16 border-t border-secondary/10 transition-all duration-700 delay-400">
+                        <span class="text-sm text-secondary/40 tracking-[0.15em] uppercase">Technologies I Use</span>
+                        <p class="mt-4 text-lg text-secondary/60">
+                            Java • Python • C • CSS • HTML • JavaScript • PHP
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -> Skills -->
+        <section id="skills" class="relative py-32">
+            <div class="container-custom">
+                <span
+                    class="reveal-anim opacity-0 translate-y-4 inline-flex items-center gap-3 text-sm font-medium text-secondary/40 tracking-[0.2em] uppercase mb-16 transition-all duration-700">
+                    <span class="w-8 h-px bg-accent"></span>
+                    Core Competencies
+                </span>
+
+                <div
+                    class="reveal-anim opacity-0 grid lg:grid-cols-2 gap-16 lg:gap-24 transition-all duration-700 delay-100">
+                    <div class="space-y-4">
+                        <button
+                            class="service-btn block text-left text-3xl md:text-4xl lg:text-5xl font-display font-bold transition-all duration-300 text-accent">Web
+                            Development</button>
+                        <button
+                            class="service-btn block text-left text-3xl md:text-4xl lg:text-5xl font-display font-bold transition-all duration-300 text-secondary/30 hover:text-secondary/60">Algorithms
+                            & Data</button>
+                        <button
+                            class="service-btn block text-left text-3xl md:text-4xl lg:text-5xl font-display font-bold transition-all duration-300 text-secondary/30 hover:text-secondary/60">Database
+                            Systems</button>
+                        <button
+                            class="service-btn block text-left text-3xl md:text-4xl lg:text-5xl font-display font-bold transition-all duration-300 text-secondary/30 hover:text-secondary/60">UI/UX
+                            Design</button>
+                    </div>
+
+                    <div class="flex items-center">
+                        <div class="relative">
+                            <p id="service-desc" class="text-xl md:text-2xl text-secondary/70 leading-relaxed">
+                                Building responsive and dynamic web applications using modern frameworks and technologies like React, Node.js, and more.
+                            </p>
+                            <div class="mt-8 flex items-center gap-2">
+                                <button
+                                    class="service-indicator h-1 rounded-full transition-all duration-300 w-8 bg-accent"></button>
+                                <button
+                                    class="service-indicator h-1 rounded-full transition-all duration-300 w-2 bg-secondary/20 hover:bg-secondary/40"></button>
+                                <button
+                                    class="service-indicator h-1 rounded-full transition-all duration-300 w-2 bg-secondary/20 hover:bg-secondary/40"></button>
+                                <button
+                                    class="service-indicator h-1 rounded-full transition-all duration-300 w-2 bg-secondary/20 hover:bg-secondary/40"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="relative py-32">
+            <div class="container-custom">
+                <span
+                    class="reveal-anim opacity-0 translate-y-4 inline-flex items-center gap-3 text-sm font-medium text-secondary/40 tracking-[0.2em] uppercase mb-12 transition-all duration-700">
+                    <span class="w-8 h-px bg-accent"></span>
+                    Get in Touch
+                </span>
+
+                <div class="reveal-anim opacity-0 translate-y-8 transition-all duration-700 delay-100">
+                    <h2
+                        class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold text-secondary leading-tight max-w-4xl mb-16">
+                        Looking for an intern or junior dev?
+                        <span class="text-accent"> Let's build something together.</span>
+                    </h2>
+
+                    <div class="grid md:grid-cols-2 gap-8 max-w-2xl">
+                        <a href="mailto:princesabalpara2006@gmail.com"
+                            class="group flex items-start gap-4 p-6 rounded-2xl border border-secondary/10 hover:border-accent/30 transition-all duration-300">
+                            <i data-feather="mail" class="w-5 h-5 text-accent mt-1"></i>
+                            <div class="flex-1">
+                                <p class="text-sm text-secondary/40 mb-1">Email me at</p>
+                                <p class="text-lg text-secondary group-hover:text-accent transition-colors">
+                                    princesabalpara2006@gmail.com</p>
+                            </div>
+                            <i data-feather="arrow-up-right"
+                                class="w-5 h-5 text-secondary/20 group-hover:text-accent transition-colors"></i>
+                        </a>
+
+                        <div class="flex items-start gap-4 p-6 rounded-2xl border border-secondary/10">
+                            <i data-feather="map-pin" class="w-5 h-5 text-accent mt-1"></i>
+                            <div>
+                                <p class="text-sm text-secondary/40 mb-1">Studying at</p>
+                                <p class="text-lg text-secondary">Silver Oak Universtiy, Gota</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-16 pt-16 border-t border-secondary/10">
+                        <p class="text-sm text-secondary/40 mb-6">Find me on</p>
+                        <div class="flex gap-6">
+                            <a href="https://www.instagram.com/_prince_.239?igsh=cXZtcTJsMzVhNjAw" target="_blank"
+                                class="text-secondary/60 hover:text-accent transition-colors text-lg font-medium">Instagram</a>
+                            <a href="https://www.linkedin.com/in/prince-sabalpara-58541a331?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank"
+                                class="text-secondary/60 hover:text-accent transition-colors text-lg font-medium">LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer Section -->
+        <footer class="py-8 border-t border-secondary/10">
+            <div class="container-custom">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <p class="text-sm text-secondary/40">© 2024 Prince Sabalpara. All rights reserved.</p>
+                    <button data-scroll-to="home"
+                        class="flex items-center gap-2 text-sm text-secondary/40 hover:text-accent transition-colors group">
+                        Back to top
+                        <i data-feather="arrow-up" class="w-4 h-4 group-hover:-translate-y-1 transition-transform"></i>
+                    </button>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        feather.replace();
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
