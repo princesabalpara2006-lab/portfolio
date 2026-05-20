@@ -43,9 +43,8 @@ const Skills = () => {
   }, []);
 
   const revealClass = (delayClass) => {
-    return `transition-all duration-700 ${delayClass} ${
-      isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-    }`;
+    return `transition-all duration-700 ${delayClass} ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+      }`;
   };
 
   return (
@@ -58,9 +57,8 @@ const Skills = () => {
         </span>
 
         {/* Content Tabs */}
-        <div className={`grid lg:grid-cols-2 gap-16 lg:gap-24 transition-all duration-700 delay-200 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-        }`}>
+        <div className={`grid lg:grid-cols-2 gap-16 lg:gap-24 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+          }`}>
           {/* Left Tab Buttons */}
           <div className="space-y-4">
             {skillsData.map((skill, index) => {
@@ -70,11 +68,10 @@ const Skills = () => {
                   key={skill.title}
                   onClick={() => setActiveTab(index)}
                   onMouseEnter={() => setActiveTab(index)}
-                  className={`block text-left text-3xl md:text-4xl lg:text-5xl font-display font-bold transition-all duration-300 ${
-                    isActive 
-                      ? 'text-accent translate-x-2' 
-                      : 'text-secondary/30 hover:text-secondary/60 hover:translate-x-1'
-                  }`}
+                  className={`block text-left text-3xl md:text-4xl lg:text-5xl font-display font-bold transition-all duration-300 ${isActive
+                    ? 'text-accent translate-x-2'
+                    : 'text-secondary/30 hover:text-secondary/60 hover:translate-x-1'
+                    }`}
                 >
                   {skill.title}
                 </button>
@@ -100,11 +97,10 @@ const Skills = () => {
                     <button
                       key={index}
                       onClick={() => setActiveTab(index)}
-                      className={`h-1 rounded-full transition-all duration-300 ${
-                        isActive 
-                          ? 'w-8 bg-accent' 
-                          : 'w-2 bg-secondary/20 hover:bg-secondary/40'
-                      }`}
+                      className={`h-1 rounded-full transition-all duration-300 ${isActive
+                        ? 'w-8 bg-accent'
+                        : 'w-2 bg-secondary/20 hover:bg-secondary/40'
+                        }`}
                       aria-label={`Go to skill slide ${index + 1}`}
                     />
                   );
